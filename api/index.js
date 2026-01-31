@@ -19,7 +19,7 @@ const sessions = new Map();
 app.use(express.json());
 
 // Upload endpoint
-app.post('/api/upload', upload.array('files'), (req, res) => {
+app.post('/upload', upload.array('files'), (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'No files uploaded' });
@@ -45,7 +45,7 @@ app.post('/api/upload', upload.array('files'), (req, res) => {
 });
 
 // Get session endpoint
-app.get('/api/session/:id', (req, res) => {
+app.get('/session/:id', (req, res) => {
   const session = sessions.get(req.params.id);
   
   if (!session) {
@@ -67,7 +67,7 @@ app.get('/api/session/:id', (req, res) => {
 });
 
 // Complete session endpoint
-app.post('/api/session/:id/complete', (req, res) => {
+app.post('/session/:id/complete', (req, res) => {
   const session = sessions.get(req.params.id);
   
   if (!session) {
@@ -79,7 +79,7 @@ app.post('/api/session/:id/complete', (req, res) => {
 });
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
